@@ -1,0 +1,40 @@
+-- ---- --
+-- Bats --
+-- ---- --
+
+-- example import
+
+bring package fun_package
+
+-- Simple function and function call
+
+do_something = do a
+	branch 1
+		a > 1
+			print a
+		a < 1
+			print a + 1
+
+do_something -5
+-- Expected output: -4
+
+-- Multi arguments
+
+a_list = (fun_package.listify 1 2 3)
+
+-- All are equivalent
+
+a_list.iterate.map do a
+	print a
+
+a_list.iterate.map print
+
+a_list.len.iterate.map do i 
+	print a_list i
+
+-- Expected output: 1	2	3
+
+-- Fun with iterators
+
+print a_list.iterate.(skip 1).(map do i | i * 2).(reduce +)
+-- Expected output: 10
