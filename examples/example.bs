@@ -2,37 +2,44 @@
 
 # example import
 
-bring package fun_package
+in ("fun_package")
 
 # Simple function and function call
 
-do_something = do a
-	branch 1
-		a > 1
-			print a
-		a < 1
-			print a + 1
+do_something = do :a {
+	a > 1 {
+		-> a
+	}
+	a < 1 {
+		-> a + 1
+	}
+}
 
-do_something -5
+print(do_something(-5))
 # Expected output: -4
 
 # Multi arguments
 
-a_list = (fun_package.listify 1 2 3)
+a_list = fun_package.listify(1 2 3)
 
 # All are equivalent
 
-a_list.iterate.map do a
-	print a
+a_list.iterate.map(do :a print(a))
 
-a_list.iterate.map print
+a_list.iterate.map(print)
 
-a_list.len.iterate.map do i 
-	print a_list i
+a_list.len.iterate.map { do (_ :i)
+	print(a_list.i)
+}
 
-# Expected output: 1	2	3
+# Expected output: 1 2 3
 
 # Fun with iterators
 
-print a_list.iterate.(skip 1).(map do i | i * 2).(reduce +)
+print(a_list.iterate().skip(1).map(do :i { -> 2 * i }).reduce(+))
 # Expected output: 10
+
+out (
+	a_list
+	do_something
+)
