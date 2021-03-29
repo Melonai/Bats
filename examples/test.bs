@@ -1,0 +1,5 @@
+this = 15
+that = this - 5
+print(a + b)
+
+print("This is an example.")
